@@ -1,0 +1,29 @@
+<!doctype html>
+<html><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cordinox Jar</title>
+<style>
+body{font-family:Arial;padding:16px;background:#fafafa;}
+.box{background:#fff;padding:16px;border-radius:12px;max-width:480px;margin:auto;}
+.price{font-size:22px;color:#0b74ff;font-weight:bold;}
+button{background:#0b74ff;color:#fff;border:none;padding:10px 12px;border-radius:6px;cursor:pointer;margin-top:10px;width:100%;}
+</style>
+</head>
+<body>
+<div class="box">
+<h2>Cordinox Jar</h2>
+<p class="price">₹590</p>
+<p>High‑quality kitchen jar. Durable, stylish and best for storage.</p>
+<button onclick="add()">Add to Cart</button>
+</div>
+<script>
+function add(){
+ let c=JSON.parse(localStorage.getItem('ecom_cart_v1')||'[]');
+ let p={id:'p1',name:'Cordinox Jar',price:590,qty:1};
+ let i=c.findIndex(x=>x.id==='p1');
+ if(i>-1) c[i].qty+=1; else c.push(p);
+ localStorage.setItem('ecom_cart_v1',JSON.stringify(c));
+ alert('Added to cart');
+}
+</script>
+</body></html>

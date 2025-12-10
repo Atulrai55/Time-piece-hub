@@ -1,0 +1,35 @@
+<!doctype html>
+<html><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cart</title>
+<style>
+body{font-family:Arial;background:#fafafa;padding:16px;}
+.box{background:#fff;padding:16px;border-radius:10px;max-width:500px;margin:auto;}
+button{background:#0b74ff;color:#fff;border:none;padding:10px 12px;border-radius:6px;cursor:pointer;margin-top:10px;}
+</style>
+</head>
+<body>
+<div class="box">
+<h2>Your Cart</h2>
+<div id="cart"></div>
+<button id="checkoutBtn">Checkout</button>
+<div id="msg"></div>
+</div>
+<script>
+const K='ecom_cart_v1';
+function load(){return JSON.parse(localStorage.getItem(K)||'[]')}
+function save(c){localStorage.setItem(K,JSON.stringify(c))}
+function render(){
+ let c=load(); let h='';
+ if(!c.length){h='Cart empty';document.getElementById('cart').innerHTML=h;return;}
+ c.forEach(i=>{h+=i.name+' x '+i.qty+' = ₹'+(i.price*i.qty)+'<br>';});
+ document.getElementById('cart').innerHTML=h;
+}
+document.getElementById('checkoutBtn').onclick=()=>{
+ let c=load(); if(!c.length){alert('Empty');return;}
+ save([]); render();
+ document.getElementById('msg').innerHTML='Order Confirmed!';
+};
+render();
+</script>
+</body></html>
